@@ -1,0 +1,82 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ *
+ */
+
+/*# sourceMappingURL=custom.css.map */
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+    margin: 10px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    padding-left: 0px !important;
+}
+
+.note-editor.note-frame.card {
+    margin: 0px !important;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+    /* margin: 0px!important; */
+    vertical-align: middle !important;
+}
+
+.custom-switch-indicator {
+    cursor: pointer;
+}
+
+.img-bukti-berkas {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+
+.img-bukti-berkas img {
+    background-position: center;
+    background-size: cover;
+}
+
+.dashboard-peserta .card-statistic-1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+}
+
+.dashboard-peserta .card-statistic-1 .card-icon {
+    margin: 0 16px 0 0;
+    width: unset;
+    height: unset;
+}
+
+.dashboard-peserta .card-statistic-1 .card-icon img{
+    object-fit: cover;
+    object-position: center;
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.dashboard-peserta .card-statistic-1 .card-wrap {
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    .dashboard-peserta .card-statistic-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: unset;
+        padding: 12px;
+    }
+
+    .dashboard-peserta .card-statistic-1 .card-icon {
+        margin: 0 0 8px 0;
+    }
+
+    .dashboard-peserta .card-statistic-1 .card-icon img{
+        width: 100px !important;
+        height: 100px !important;
+    }
+}

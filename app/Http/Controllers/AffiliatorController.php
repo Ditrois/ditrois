@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Affiliator;
+use App\Models\AffiliatorWithdrawal;
 use Illuminate\Http\Request;
 
 class AffiliatorController extends Controller
@@ -14,7 +15,14 @@ class AffiliatorController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.affiliators');
+        $affiliators = Affiliator::all();
+        $affiliatorWithdrawals = AffiliatorWithdrawal::where('status', '=', 'pending')->get();
+        $affiliatorCount = Affiliator::all()->count();
+        
+        $unpaidBalance = AffiliatorWithdrawal::where('status', '=', 'pending')->sum('amount');
+
+
+        return view('dashboard.admin.affiliators', compact('affiliatorWithdrawals', 'affiliators', 'affiliatorCount', 'unpaidBalance'));
     }
 
     /**
@@ -55,9 +63,10 @@ class AffiliatorController extends Controller
      * @param  \App\Models\Affiliator  $affiliator
      * @return \Illuminate\Http\Response
      */
-    public function edit(Affiliator $affiliator)
+    public function edit($id)
     {
-        //
+        $withdraw = AffiliatorWithdrawal::find($id);
+        return view('dashboard.admin.affiliator_edit', compact('withdraw'));
     }
 
     /**
@@ -67,9 +76,20 @@ class AffiliatorController extends Controller
      * @param  \App\Models\Affiliator  $affiliator
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Affiliator $affiliator)
+    public function update(Request $request, $id)
     {
-        //
+        $withdraw = AffiliatorWithdrawal::find($id);
+        if(is_null($request->withdraw_proof)){
+        }else{
+            $file = $request->file('withdraw_proof');
+            $path = 'affiliate/withdraw';
+            $nama_file = time()."_".$file->getClientOriginalName();
+            $file->move($path,$nama_file);
+            $withdraw->withdraw_proof = $nama_file;
+        }
+        $withdraw->status = 'success';
+        $withdraw->save();
+        return redirect ('/dashboard/admin/affiliator');
     }
 
     /**

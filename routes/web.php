@@ -73,7 +73,8 @@ Route::group(['prefix' => 'dashboard',], function () {;
             });
             Route::group(['prefix' => 'affiliator'], function () { 
                 Route::get('/', [AffiliatorController::class, 'index']);
-                Route::get('/new', [AffiliatorController::class, 'store']);
+                Route::get('/edit/{id}', [AffiliatorController::class, 'edit']);
+                Route::post('/update/{id}', [AffiliatorController::class, 'update']);
             });
             Route::group(['prefix' => 'admin'], function () { 
                 Route::get('/', [AdminController::class, 'index']);

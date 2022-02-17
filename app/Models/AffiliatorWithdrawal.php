@@ -13,6 +13,6 @@ class AffiliatorWithdrawal extends Model
 
     public function affiliator()
     {
-        return $this->belongsTo(Affiliator::class);
+        return $this->belongsTo(Affiliator::class, 'id_affiliator');
     }
 }

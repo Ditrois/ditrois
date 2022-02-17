@@ -26,7 +26,7 @@
               No Rekening : {{$withdraw->no_rekening}} <br>
               Atas Nama : {{$withdraw->nama}} <br>
               Status : {{$withdraw->status}} <br> <br>
-              <img style="height: 180px; overflow: hidden;" class="card-img-top rounded-lg mx-auto d-block" src="/affiliate/withdraw/{{$withdraw->withdraw_proof}}" alt="Belum ada bukti pengiriman saldo yg ditarik, harap tunggu, maksimal 3 hari setelah penarikan dilakukan">
+              <img style="overflow: hidden;" class="card-img-top rounded-lg mx-auto d-block" src="/affiliate/withdraw/{{$withdraw->withdraw_proof}}" alt="Belum ada bukti pengiriman saldo yg ditarik, harap tunggu, maksimal 3 hari setelah penarikan dilakukan">
             </div>
           </div>
         </div>

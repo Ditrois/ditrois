@@ -77,7 +77,11 @@ Route::group(['prefix' => 'dashboard',], function () {;
             });
             Route::group(['prefix' => 'admin'], function () { 
                 Route::get('/', [AdminController::class, 'index']);
-                Route::get('/new', [AdminController::class, 'store']);
+                Route::get('/new', [AdminController::class, 'create']);
+                Route::post('/new', [AdminController::class, 'store']);
+                Route::get('/delete/{id}', [AdminController::class, 'destroy']);
+                Route::get('/edit/{id}', [AdminController::class, 'edit']);
+                Route::post('/update/{id}', [AdminController::class, 'update']);
             });
         });
     });

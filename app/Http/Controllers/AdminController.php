@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -14,7 +17,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.admins');
+        $admins = Admin::all();
+        return view('dashboard.admin.admins', compact('admins'));
     }
 
     /**
@@ -24,7 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.admin_new');
     }
 
     /**
@@ -35,7 +39,38 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        // dd($data);
+
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => ['required', 'string'],
+                'email' => ['required', 'email', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
+                'phone_number' => ['required', 'string'],
+                'address' => ['required', 'string'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $data['email_verified_at'] = now()->toDateTimeString();
+            $data['password'] = Hash::make($request->password);
+            // $data['phone_number'] = $request->phone_number;
+            // $data['address'] = $request->address;
+
+            $user = User::create($data);
+            $user->assignRole('admin');
+
+            Admin::create([
+                'id_user' => $user->id,
+            ]);
+
+            return redirect ('/dashboard/admin/admin')->with('toast_success','Berhasil membuat akun juri');
+        }
     }
 
     /**
@@ -55,9 +90,11 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit($id)
     {
-        //
+        $admin = User::find($id);
+
+        return view('dashboard.admin.admin_edit', compact('admin'));
     }
 
     /**
@@ -67,9 +104,19 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, $id)
     {
-        //
+        $admin = User::find($id);
+        
+        if ($request->password == null) {
+            $data = $request->except(['password']);
+        } else {
+            $data = $request->all();
+        }
+        
+        $admin->update($data);
+
+        return redirect ('/dashboard/admin/admin');
     }
 
     /**
@@ -78,8 +125,10 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
-        //
+        Admin::where('id_user', $id)->delete();
+        User::where('id', $id)->delete();
+        return redirect ('/dashboard/admin/admin');
     }
 }

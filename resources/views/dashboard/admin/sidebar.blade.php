@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="dropdown">
-            <a class="nav-link has-dropdown" href="blank.html">
+            <a class="nav-link has-dropdown" href="">
                 <i class="fas fa-code"></i>
                 <span>Services</span>
             </a>

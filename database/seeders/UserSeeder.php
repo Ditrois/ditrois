@@ -23,6 +23,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@ditrois.com',
             'email_verified_at' => $dateNow,
             'password' => Hash::make('123123'),
+            'phone_number' => '081234123123',
+            'address' => 'Buruan Blahbatuh',
         ]);
         $admin->assignRole('admin');
     }

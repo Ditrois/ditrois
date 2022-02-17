@@ -27,13 +27,13 @@
         <li class="">
             <a class="nav-link" href="/dashboard/affiliator/payment">
                 <i class="fas fa-users"></i>
-                <span>Payment</span>
+                <span>Saldo</span>
             </a>
         </li>
-        <li class="">
+        <!-- <li class="">
             <a class="nav-link" href="/dashboard/affiliator/account">
                 <i class="fas fa-user"></i>
                 <span>Account Setting</span>
             </a>
-        </li>
+        </li> -->
 </aside>

@@ -1,6 +1,6 @@
 @extends('dashboard.layout.layout')
 
-@section('title', 'Payment')
+@section('title', 'Saldo')
 
 @section('sidebar')
 @include('dashboard.affiliator.sidebar')
@@ -18,62 +18,17 @@
 
 
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                   <i class="far fa-user"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Services</h4>
+                    <h4>Saldo</h4>
                   </div>
                   <div class="card-body">
-                    10
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-danger">
-                  <i class="far fa-newspaper"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Transaction</h4>
-                  </div>
-                  <div class="card-body">
-                    42
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-warning">
-                  <i class="far fa-file"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Weddings</h4>
-                  </div>
-                  <div class="card-body">
-                    1,201
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-success">
-                  <i class="fas fa-circle"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Affiliators</h4>
-                  </div>
-                  <div class="card-body">
-                    47
+                    Rp{{number_format($affiliator->saldo)}}
                   </div>
                 </div>
               </div>
@@ -81,133 +36,75 @@
           </div>
 
 
-        <div class="row">
-        <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+          <div class="row">
+        <div class="col-md-12"><div class="card">
+        <div class="card-header">
+          <h4>Tarik Saldo</h4>
+        </div>
+        <div class="card-body">
+          <form action="/dashboard/affiliator/payment/withdraw" method="post">
+              @csrf
+            <div class="form-group row">
+              <label class="col-form-label text-md-center col-12 col-md-12 col-lg-12">
+                INFORMASI PENARIKAN :<br>{{$affiliator->bank}}<br>{{$affiliator->no_rekening}}<br>{{$affiliator->nama}}</label>
+            </div>
+            <div class="form-group row mb-1">
+              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Penarikan</label>
+              <div class="col-sm-12 col-md-7">
+                <input name="amount" type="number" class="form-control" value="" required min="25000">
+              </div>
+            </div>
+            <div class="form-group row mb-4">
+              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+              
+              <div class="col-sm-12 col-md-7 d-flex justify-content-center">
+                <a href="/dashboard/affiliator/payment/edit" class="btn btn-warning mr-2">Ubah Nomor Rekening</a>
+                <button type="submit" class="btn btn-primary mr-2">Tarik</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="card-footer bg-whitesmoke">
+          <!-- Ketika ada seseorang yang mengakses link yang berisikan kode afilliasimu, kamu akan mendapatkan komisi sebesar 25% dari total transaksi yang orang tersebut lakukan dalam 3 bulan setelah ia pertama kali mengakses link yang berisikan kode affiliasimu. -->
+        </div>
+      </div>
               <div class="card">
                 <div class="card-header">
-                  <h4>Latest Posts</h4>
-                  <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">View All</a>
-                  </div>
+                  <h4>Riwayat Penarikan</h4>
                 </div>
                 <div class="card-body p-0">
-                  <div class="table-responsive">
-                    <table class="table table-striped mb-0">
-                      <thead>
-                        <tr>
-                          <th>Title</th>
-                          <th>Author</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            Introduction Laravel 5
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Installation
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - MVC
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Migration
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Deploy
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Closing
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                      </tbody>
+                  <div class="table-responsive table-invoice">
+                    <table class="table table-striped">
+                      <tr>
+                        <th>Jumlah</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                        <th>Action</th>
+                      </tr>
+                      @foreach ($withdraws as $withdraw)
+                      <tr>
+                        <td class="font-weight-600">Rp{{number_format($withdraw->amount)}}</td>
+                        <td>
+                          @if ($withdraw->status == 'pending')
+                            <div class="badge badge-warning">Pending</div>
+                          @elseif ($withdraw->status == 'rejeced')
+                            <div class="badge badge-danger">Rejected</div>
+                          @else
+                            <div class="badge badge-success">Paid</div>
+                          @endif
+                        </td>
+                        <td>{{$withdraw->created_at}}</td>
+                        <td>
+                          <a href="/dashboard/affiliator/payment/detail/{{$withdraw->id}}" class="btn btn-primary">Detail</a>
+                        </td>
+                      </tr>
+                      @endforeach
                     </table>
                   </div>
                 </div>
               </div>
+            </div>
             </div>
             </div>
         </div>

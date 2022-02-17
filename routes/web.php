@@ -94,7 +94,7 @@ Route::group(['prefix' => 'dashboard',], function () {;
             Route::get('/', [AffiliatorControllerDahboard::class, 'index'])->name('dashboard');
             Route::group(['prefix' => 'code'], function () { 
                 Route::get('/', [CodeController::class, 'index']);
-                Route::get('/new', [CodeController::class, 'store']);
+                Route::post('/update/{id}', [CodeController::class, 'update']);
             });
             Route::group(['prefix' => 'transaction'], function () { 
                 Route::get('/', [TransactionControllerAffiliator::class, 'index']);
@@ -102,6 +102,10 @@ Route::group(['prefix' => 'dashboard',], function () {;
             });
             Route::group(['prefix' => 'payment'], function () { 
                 Route::get('/', [PaymentConttroller::class, 'index']);
+                Route::get('/detail/{id}', [PaymentConttroller::class, 'show']);
+                Route::get('/edit', [PaymentConttroller::class, 'edit']);
+                Route::post('/update', [PaymentConttroller::class, 'update']);
+                Route::post('/withdraw', [PaymentConttroller::class, 'store']);
             });
             Route::group(['prefix' => 'account'], function () { 
                 Route::get('/', [AccountController::class, 'index']);

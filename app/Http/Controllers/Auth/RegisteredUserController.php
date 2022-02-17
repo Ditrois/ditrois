@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliator;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -50,6 +51,25 @@ class RegisteredUserController extends Controller
         $user->assignRole('affiliator');
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        $length = 10;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        Affiliator::create([
+            'id_user' => $user->id,
+            'code' => $randomString
+        ]);
+        
+        if (Auth::user()->hasRole(['admin'])) {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::user()->hasRole('affiliator')) {
+            return redirect()->route('affiliator.dashboard');
+        } else {
+            return abort(403);
+        }
     }
 }

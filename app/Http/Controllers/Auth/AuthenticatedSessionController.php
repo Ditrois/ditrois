@@ -32,7 +32,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/dashboard/affiliator');
+        if (Auth::user()->hasRole(['admin'])) {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::user()->hasRole('affiliator')) {
+            return redirect()->route('affiliator.dashboard');
+        } else {
+            return abort(403);
+        }
     }
 
     /**

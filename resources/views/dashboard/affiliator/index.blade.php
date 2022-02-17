@@ -18,62 +18,47 @@
 
 
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div onclick="location.href='/dashboard/affiliator/code';" class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                   <i class="far fa-user"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Services</h4>
+                    <h4>Kode Afiliasimu</h4>
                   </div>
                   <div class="card-body">
-                    10
+                    <a href="/dashboard/affiliator/code">{{$aff->code}}</a>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div onclick="location.href='/dashboard/affiliator/transaction';" class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-danger">
                   <i class="far fa-newspaper"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Transaction</h4>
+                    <h4>Total Komisi</h4>
                   </div>
                   <div class="card-body">
-                    42
+                    {{$transactionSum}}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div onclick="location.href='/dashboard/affiliator/payment';" class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-warning">
                   <i class="far fa-file"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Weddings</h4>
+                    <h4>Saldo Anda</h4>
                   </div>
                   <div class="card-body">
-                    1,201
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-success">
-                  <i class="fas fa-circle"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Affiliators</h4>
-                  </div>
-                  <div class="card-body">
-                    47
+                    Rp{{number_format($aff->saldo)}}
                   </div>
                 </div>
               </div>
@@ -81,7 +66,7 @@
           </div>
 
 
-        <div class="row">
+        <!-- <div class="row">
         <div class="col-lg-7 col-md-12 col-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
@@ -432,7 +417,7 @@
                 </div>
               </div>
             </div>
-            </div>
+            </div> -->
 
 
 

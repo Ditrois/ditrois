@@ -19,4 +19,9 @@ class Affiliator extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function affiliator_withdrawal()
+    {
+        return $this->hasMany(AffiliatorWithdrawal::class);
+    }
 }

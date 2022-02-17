@@ -16,12 +16,11 @@ class CreateAffiliatorsTable extends Migration
         Schema::create('affiliators', function (Blueprint $table) {
             $table->id();
             $table->integer('id_user');
-            $table->string('name');
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('province');
-            $table->text('description');
-            $table->integer('saldo');
+            $table->string('code');
+            $table->integer('saldo')->default('0');
+            $table->string('bank');
+            $table->string('no_rekening');
+            $table->string('nama');
             $table->timestamps();
         });
     }

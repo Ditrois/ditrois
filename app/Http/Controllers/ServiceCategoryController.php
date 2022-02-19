@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ServiceCategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceCategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.categories');
+        $categories = ServiceCategory::all();
+        return view('dashboard.admin.categories', compact('categories'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ServiceCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admin.category_new');
     }
 
     /**
@@ -35,7 +37,13 @@ class ServiceCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->name, '-');
+
+        ServiceCategory::create($data);
+
+        return redirect ('/dashboard/admin/category')->with('toast_success','Berhasil membuat akun juri');
     }
 
     /**
@@ -55,9 +63,11 @@ class ServiceCategoryController extends Controller
      * @param  \App\Models\ServiceCategory  $serviceCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ServiceCategory $serviceCategory)
+    public function edit($id)
     {
-        //
+        $category = ServiceCategory::find($id);
+
+        return view('dashboard.admin.category_edit', compact('category'));
     }
 
     /**
@@ -67,9 +77,17 @@ class ServiceCategoryController extends Controller
      * @param  \App\Models\ServiceCategory  $serviceCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ServiceCategory $serviceCategory)
+    public function update(Request $request, $id)
     {
-        //
+        
+        $category = ServiceCategory::find($id);
+        
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name, '-');
+        
+        $category->update($data);
+
+        return redirect ('/dashboard/admin/category');
     }
 
     /**
@@ -78,8 +96,9 @@ class ServiceCategoryController extends Controller
      * @param  \App\Models\ServiceCategory  $serviceCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceCategory $serviceCategory)
+    public function destroy($id)
     {
-        //
+        ServiceCategory::find($id)->delete();
+        return redirect ('/dashboard/admin/category');
     }
 }

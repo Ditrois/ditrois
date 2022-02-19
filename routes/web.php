@@ -58,15 +58,27 @@ Route::group(['prefix' => 'dashboard',], function () {;
             });
             Route::group(['prefix' => 'category'], function () { 
                 Route::get('/', [ServiceCategoryController::class, 'index']);
-                Route::get('/new', [ServiceCategoryController::class, 'store']);
+                Route::get('/new', [ServiceCategoryController::class, 'create']);
+                Route::post('/new', [ServiceCategoryController::class, 'store']);
+                Route::get('/delete/{id}', [ServiceCategoryController::class, 'destroy']);
+                Route::get('/edit/{id}', [ServiceCategoryController::class, 'edit']);
+                Route::post('/update/{id}', [ServiceCategoryController::class, 'update']);
             });
             Route::group(['prefix' => 'theme'], function () { 
                 Route::get('/', [ThemeController::class, 'index']);
-                Route::get('/new', [ThemeController::class, 'store']);
+                Route::get('/new', [ThemeController::class, 'create']);
+                Route::post('/new', [ThemeController::class, 'store']);
+                Route::get('/delete/{id}', [ThemeController::class, 'destroy']);
+                Route::get('/edit/{id}', [ThemeController::class, 'edit']);
+                Route::post('/update/{id}', [ThemeController::class, 'update']);
             });
             Route::group(['prefix' => 'transaction'], function () { 
                 Route::get('/', [TransactionController::class, 'index']);
-                Route::get('/new', [TransactionController::class, 'store']);
+                Route::get('/new', [TransactionController::class, 'create']);
+                Route::post('/new', [TransactionController::class, 'store']);
+                Route::get('/delete/{id}', [TransactionController::class, 'destroy']);
+                Route::get('/edit/{id}', [TransactionController::class, 'edit']);
+                Route::post('/update/{id}', [TransactionController::class, 'update']);
             });
             Route::group(['prefix' => 'wedding'], function () { 
                 Route::get('/', [WeddingController::class, 'index']);

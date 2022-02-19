@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class ThemeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.themes');
+        $themes = Theme::all();
+        return view('dashboard.admin.themes', compact('themes'));
     }
 
     /**
@@ -23,8 +25,9 @@ class ThemeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $services = Service::all();
+        return view('dashboard.admin.theme_new', compact('services'));
     }
 
     /**
@@ -35,7 +38,17 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $file = $request->file('image');
+        $path = 'admin/theme';
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $file->move($path,$nama_file);
+        $data['image'] = $nama_file;
+        
+        Theme::create($data);
+
+        return redirect ('/dashboard/admin/theme')->with('toast_success','Berhasil membuat akun juri');
     }
 
     /**
@@ -55,9 +68,12 @@ class ThemeController extends Controller
      * @param  \App\Models\Theme  $theme
      * @return \Illuminate\Http\Response
      */
-    public function edit(Theme $theme)
+    public function edit($id)
     {
-        //
+        $theme = Theme::find($id);
+        $services = Service::all();
+
+        return view('dashboard.admin.theme_edit', compact('theme', 'services'));
     }
 
     /**

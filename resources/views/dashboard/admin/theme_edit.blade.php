@@ -1,6 +1,6 @@
 @extends('dashboard.layout.layout')
 
-@section('title', 'Create New Service')
+@section('title', 'Edi Theme')
 
 @section('sidebar')
 @include('dashboard.admin.sidebar')
@@ -14,7 +14,7 @@
             <!-- <div class="section-header-back">
               <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div> -->
-            <h1>Create New Service</h1>
+            <h1>Edit Theme</h1>
             <!-- <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item"><a href="#">Posts</a></div>
@@ -35,52 +35,43 @@
                     <h4>Write Your Post</h4>
                   </div> -->
                   <div class="card-body">
+                  <form action="/dashboard/admin/theme/edit/{{$theme->id}}" method="post" enctype="multipart/form-data">
+                      @csrf
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" value="{{$theme->name}}">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Service</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric">
-                          <option>Tech</option>
-                          <option>News</option>
-                          <option>Political</option>
+                        <select name="id_service" class="form-control selectric">
+                            @foreach ($services as $service)
+                            <option value="{{$service->id}}" @if ($theme->name == $service->id)@endif>{{$service->name}}</option>
+                            @endforeach
                         </select>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Heading</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Demo Link</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="banner_heading" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Description</label>
-                      <div class="col-sm-12 col-md-7">
-                        <textarea name="banner_desc" class="summernote-simple"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Feature Description</label>
-                      <div class="col-sm-12 col-md-7">
-                        <textarea name="feature_desc" class="summernote-simple"></textarea>
+                        <input type="text" name="demo_link" class="form-control" value="{{$theme->name}}">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="file" name="withdraw_proof" accept=".jpeg,.jpg,.png,.gif" onchange="preview_image(event)">
+                        <input type="file" name="image" accept=".jpeg,.jpg,.png,.gif" onchange="preview_image(event)">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <button class="btn btn-primary">Create Post</button>
+                        <button type="submit" class="btn btn-primary">Create Theme</button>
                       </div>
                     </div>
+                  </form>
                   </div>
                 </div>
               </div>

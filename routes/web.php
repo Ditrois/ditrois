@@ -30,6 +30,10 @@ use App\Http\Controllers\Dashboard\Affiliator\PaymentConttroller;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('service/dental', function () {
+    dd('zzzz');
+    return view('dental');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

@@ -13,6 +13,7 @@
         <div class="section-header">
             <h1>@yield('title')</h1>
         </div>
+        @include('dashboard.alert')
 
         <div class="section-body">
 
@@ -20,7 +21,7 @@
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Latest Posts</h4>
+                  <h4>Transaction List</h4>
                   <div class="card-header-action">
                     <a href="/dashboard/admin/transaction/new" class="btn btn-primary">Create Transaction</a>
                   </div>
@@ -33,6 +34,7 @@
                           <th>Customer</th>
                           <th>Status</th>
                           <th>Date</th>
+                          <th>Total</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -57,8 +59,20 @@
                             {{$transaction->created_at}}
                           </td>
                           <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+                            Rp{{number_format($transaction->total)}}
+                          </td>
+                          <td>
+                            @isset($transaction->result_link)
+                            <a href="{{$transaction->result_link}}" class="btn btn-success btn-action mr-1">
+                                    <i class="fas fa-eye"></i>
+                            </a>
+                            @endisset
+                            <a href="/dashboard/admin/transaction/edit/{{$transaction->id}}" class="btn btn-primary btn-action mr-1">
+                                    <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="/dashboard/admin/transaction/delete/{{$transaction->id}}" class="btn btn-danger btn-action" onclick="return confirm ('Hapus transaksi?')">
+                                    <i class="fas fa-trash"></i>
+                            </a>
                           </td>
                         </tr>
                         @endforeach

@@ -42,59 +42,5 @@ class AffiliatorSeeder extends Seeder
             'no_rekening' => '401653215',
             'nama' => 'I Nyoman Jyotisa',
         ]);
-
-        $serCat = ServiceCategory::create([
-            'name' => 'Undangan',
-            'slug' => 'undangan',
-            'description' => 'blablabla',
-        ]);
-
-        $ser = Service::create([
-            'id_service_category' => $serCat->id,
-            'name' => 'Undangan Nikah Web',
-            'slug' => 'undangan_nikah_web',
-            'banner_heading' => 'Undangan Nikah Web',
-            'banner_desc' => 'Undangan Nikah Web',
-            'feature_desc' => 'Undangan Nikah Web',
-            'image' => 'Undangan Nikah Web',
-        ]);
-
-        $theme = Theme::create([
-            'id_service' => $ser->id,
-            'name' => 'Dark Wedding',
-            'demo_link' => 'Undangan Nikah Web',
-            'image' => 'Undangan Nikah Web',
-        ]);
-
-        $trans = Transaction::create([
-            'id_service' => $ser->id,
-            'id_affiliator' => $aff->id,
-            'id_theme' => $theme->id,
-            'customer_name' => 'Cok Man',
-            'customer_phone_number' => '081231761223',
-            'total' => '100000',
-            'status' => 'pending',
-        ]);
-        
-        Wedding::create([
-            'id_transaction' => $trans->id,
-            'title' => 'Wedding Ari Yuni',
-            'slug' => 'ariyuniwedding',
-            'date' => '2022-04-04',
-            'time' => '18:00',
-            'location' => 'gang matahari',
-            'maps_link' => 'blabla',
-            'edit_code' => 'blabla',
-            'song' => 'blabla',
-        ]);
-
-        AffiliatorWithdrawal::create([
-            'id_affiliator' => $aff->id,
-            'amount' => '100000',
-            'status' => 'pending',
-            'bank' => 'BCA',
-            'no_rekening' => '401653215',
-            'nama' => 'I Nyoman Jyotisa',
-        ]);
     }
 }

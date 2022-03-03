@@ -12,11 +12,16 @@ class ServicePackage extends Model
 
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class, 'id_service');
     }
 
     public function service_package_features()
     {
         return $this->hasMany(ServicePackageFeature::class);
+    }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

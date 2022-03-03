@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,11 @@ class Transaction extends Model
     public function theme()
     {
         return $this->belongsTo(Theme::class);
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
     
     public function weddings()

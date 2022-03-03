@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\ServicePackage;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
 {
@@ -42,7 +43,32 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        // dd($data);
+
+        $validator = Validator::make(
+            $data,
+            [
+                'id_service' => ['required'],
+                'id_package' => ['required'],
+                'id_theme' => ['required'],
+                'customer_name' => ['required', 'string', 'min:5'],
+                'customer_phone_number' => ['required', 'string', 'min:10'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $total = ServicePackage::where('id', $data['id_package'])->get()->first();
+            $data['total'] = $total->price;
+            $data['status'] = "pending";
+
+            Transaction::create($data);
+
+            return redirect ('/dashboard/admin/transaction')->with(['success' => 'Transaksi Baru Berhasil Dibuat']);
+        }
     }
 
     /**
@@ -62,9 +88,14 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $transaction = Transaction::find($id);
+        $services = Service::all();
+        $packages = ServicePackage::all();
+        $themes = Theme::all();
+
+        return view('dashboard.admin.transaction_edit', compact('transaction', 'services', 'packages', 'themes'));
     }
 
     /**
@@ -74,9 +105,33 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $transaction = Transaction::find($id);
+        $data = $request->all();
+
+        $validator = Validator::make(
+            $data,
+            [
+                'id_service' => ['required'],
+                'id_package' => ['required'],
+                'id_theme' => ['required'],
+                'customer_name' => ['required', 'string', 'min:5'],
+                'customer_phone_number' => ['required', 'string', 'min:10'],
+                'status' => ['required'],
+            ]
+        );
+        
+        $total = ServicePackage::where('id', $data['id_package'])->get()->first();
+        $data['total'] = $total->price;
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $transaction->update($data);
+        }
+
+        return redirect ('/dashboard/admin/transaction')->with(['success' => 'Transaksi Berhasil Diupdate']);
     }
 
     /**
@@ -85,8 +140,9 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        Transaction::where('id', $id)->delete();
+        return redirect ('/dashboard/admin/transaction')->with(['success' => 'Transaction Berhasil Dihapus']);
     }
 }

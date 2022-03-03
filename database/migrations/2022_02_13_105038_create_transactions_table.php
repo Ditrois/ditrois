@@ -17,9 +17,11 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->integer('id_service');
             $table->integer('id_affiliator')->nullable();
+            $table->integer('id_package')->nullable();
             $table->integer('id_theme');
             $table->string('customer_name');
             $table->string('customer_phone_number');
+            $table->string('result_link')->nullable();
             $table->integer('total');
             $table->enum('status', ['pending', 'approved', 'rejeced', 'complete', 'refund']);
             $table->timestamps();

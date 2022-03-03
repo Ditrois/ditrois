@@ -12,7 +12,7 @@ class Theme extends Model
 
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class, 'id_service');
     }
     
     public function themes()

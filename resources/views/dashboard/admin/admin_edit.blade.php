@@ -30,6 +30,16 @@
                     <h4>Fill this form to add a new admin</h4>
                   </div>
                   <div class="card-body">
+                  {{-- menampilkan error validasi --}}
+                  @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                  @endif
                   <form action="/dashboard/admin/admin/update/{{$admin->id}}" method="post">
                       @csrf
                     <div class="form-group row mb-4">

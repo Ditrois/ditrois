@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -46,11 +47,11 @@ class AdminController extends Controller
         $validator = Validator::make(
             $data,
             [
-                'name' => ['required', 'string'],
+                'name' => ['required', 'string', 'min:5'],
                 'email' => ['required', 'email', 'unique:users'],
                 'password' => ['required', 'string', 'min:8'],
-                'phone_number' => ['required', 'string'],
-                'address' => ['required', 'string'],
+                'phone_number' => ['required', 'string', 'min:10'],
+                'address' => ['required', 'string', 'min:10'],
             ]
         );
 
@@ -58,9 +59,7 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $data['email_verified_at'] = now()->toDateTimeString();
-            $data['password'] = Hash::make($request->password);
-            // $data['phone_number'] = $request->phone_number;
-            // $data['address'] = $request->address;
+            $data['password'] = Hash::make($request->password); 
 
             $user = User::create($data);
             $user->assignRole('admin');
@@ -69,7 +68,7 @@ class AdminController extends Controller
                 'id_user' => $user->id,
             ]);
 
-            return redirect ('/dashboard/admin/admin')->with('toast_success','Berhasil membuat akun juri');
+            return redirect ('/dashboard/admin/admin')->with(['success' => 'Admin Baru Berhasil Dibuat']);
         }
     }
 
@@ -113,10 +112,25 @@ class AdminController extends Controller
         } else {
             $data = $request->all();
         }
-        
-        $admin->update($data);
 
-        return redirect ('/dashboard/admin/admin');
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => ['required', 'string', 'min:5'],
+                Rule::unique('users')->ignore($admin),
+                'password' => ['string', 'min:8'],
+                'phone_number' => ['required', 'string', 'min:10'],
+                'address' => ['required', 'string', 'min:10'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $admin->update($data);
+        }
+
+        return redirect ('/dashboard/admin/admin')->with(['success' => 'Admin Berhasil Diupdate']);
     }
 
     /**
@@ -129,6 +143,6 @@ class AdminController extends Controller
     {
         Admin::where('id_user', $id)->delete();
         User::where('id', $id)->delete();
-        return redirect ('/dashboard/admin/admin');
+        return redirect ('/dashboard/admin/admin')->with(['success' => 'Admin Berhasil Dihapus']);
     }
 }

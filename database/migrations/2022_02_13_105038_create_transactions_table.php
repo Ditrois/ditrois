@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->integer('id_service');
-            $table->integer('id_affiliator');
+            $table->integer('id_affiliator')->nullable();
             $table->integer('id_theme');
             $table->string('customer_name');
             $table->string('customer_phone_number');

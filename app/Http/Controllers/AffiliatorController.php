@@ -89,7 +89,7 @@ class AffiliatorController extends Controller
         }
         $withdraw->status = 'success';
         $withdraw->save();
-        return redirect ('/dashboard/admin/affiliator');
+        return redirect ('/dashboard/admin/affiliator')->with(['success' => 'Bukti Transfer Berhasil Diupload']);
     }
 
     /**

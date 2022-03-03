@@ -20,6 +20,16 @@ class Service extends Model
         return $this->hasMany(ServiceFeature::class);
     }
     
+    public function service_packages()
+    {
+        return $this->hasMany(ServicePackage::class);
+    }
+    
+    public function service_package_features()
+    {
+        return $this->hasMany(ServicePackageFeature::class);
+    }
+    
     public function pricings()
     {
         return $this->hasMany(Pricing::class);

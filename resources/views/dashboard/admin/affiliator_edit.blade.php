@@ -26,7 +26,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Write Your Post</h4>
+              <h4>Pilih Bukti Transfer ke Affiliator</h4>
             </div>
             <div class="card-body">
               ID Penarikan : {{$withdraw->id}} <br>
@@ -44,7 +44,7 @@
                 <div class="form-group row mb-4">
                   <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                   <div class="col-sm-12 col-md-7">
-                    <button type="submit" class="btn btn-primary">Create Post</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </form>

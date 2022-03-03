@@ -12,7 +12,7 @@ class Wedding extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Transaction::class, 'id_transaction');
     }
     
     public function wedding_people()

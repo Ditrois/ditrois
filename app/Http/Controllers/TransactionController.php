@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Service;
+use App\Models\ServicePackage;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,7 +17,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin.transactions');
+        $transactions = Transaction::all();
+        return view('dashboard.admin.transactions', compact('transactions'));
     }
 
     /**
@@ -24,7 +28,10 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin.transaction_new');
+        $services = Service::all();
+        $packages = ServicePackage::all();
+        $themes = Theme::all();
+        return view('dashboard.admin.transaction_new', compact('services', 'packages', 'themes'));
     }
 
     /**

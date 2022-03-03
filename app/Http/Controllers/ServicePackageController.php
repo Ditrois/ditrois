@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wedding;
-use App\Models\Transaction;
+use App\Models\ServicePackage;
 use Illuminate\Http\Request;
 
-class WeddingController extends Controller
+class ServicePackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +13,8 @@ class WeddingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $weddings = Wedding::all();
-        $revenue = Transaction::where('id_service', 1)->where('status', '<>', 'pending')->where('status', '<>', 'rejeced')->where('status', '<>', 'refund')->sum('total');
-        $unpaid = Transaction::where('id_service', 1)->where('status', '=', 'pending')->sum('total');
-
-        return view('dashboard.admin.weddings', compact('weddings', 'revenue', 'unpaid'));
+    {
+        //
     }
 
     /**
@@ -46,10 +41,10 @@ class WeddingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Wedding  $wedding
+     * @param  \App\Models\ServicePackage  $servicePackage
      * @return \Illuminate\Http\Response
      */
-    public function show(Wedding $wedding)
+    public function show(ServicePackage $servicePackage)
     {
         //
     }
@@ -57,10 +52,10 @@ class WeddingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Wedding  $wedding
+     * @param  \App\Models\ServicePackage  $servicePackage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Wedding $wedding)
+    public function edit(ServicePackage $servicePackage)
     {
         //
     }
@@ -69,10 +64,10 @@ class WeddingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Wedding  $wedding
+     * @param  \App\Models\ServicePackage  $servicePackage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wedding $wedding)
+    public function update(Request $request, ServicePackage $servicePackage)
     {
         //
     }
@@ -80,10 +75,10 @@ class WeddingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Wedding  $wedding
+     * @param  \App\Models\ServicePackage  $servicePackage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wedding $wedding)
+    public function destroy(ServicePackage $servicePackage)
     {
         //
     }

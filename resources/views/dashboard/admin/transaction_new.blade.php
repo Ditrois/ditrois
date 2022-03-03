@@ -35,52 +35,54 @@
                     <h4>Write Your Post</h4>
                   </div> -->
                   <div class="card-body">
-                  <form action="/dashboard/admin/theme/new" method="post">
+                  <form action="/dashboard/admin/transaction/new" method="post">
                       @csrf
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Service</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="name" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                      <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric">
-                          <option>Tech</option>
-                          <option>News</option>
-                          <option>Political</option>
+                        <select class="form-control selectric" name="service">
+                          @foreach ($services as $service)
+                          <option>{{$service->name}}</option>
+                          @endforeach
                         </select>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Heading</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Package</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="banner_heading" class="form-control">
+                        <select class="form-control selectric" name="package">
+                          @foreach ($packages as $package)
+                          <option>{{$package->name}}</option>
+                          @endforeach
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Description</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Theme</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="banner_desc" class="summernote-simple"></textarea>
+                        <select class="form-control selectric" name="theme">
+                          @foreach ($themes as $theme)
+                          <option>{{$theme->name}}</option>
+                          @endforeach
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Feature Description</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Customer Name</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="feature_desc" class="summernote-simple"></textarea>
+                        <input type="text" name="customer_name" class="form-control">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Cutomer Phone Number</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="file" name="withdraw_proof" accept=".jpeg,.jpg,.png,.gif" onchange="preview_image(event)">
+                        <input type="text" name="customer_phone_number" class="form-control">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <button class="btn btn-primary">Create Post</button>
+                        <button class="btn btn-primary">Create Transaction</button>
                       </div>
                     </div>
                   </form>

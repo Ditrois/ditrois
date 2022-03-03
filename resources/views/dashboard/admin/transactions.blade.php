@@ -30,115 +30,38 @@
                     <table class="table table-striped mb-0">
                       <thead>
                         <tr>
-                          <th>Title</th>
-                          <th>Author</th>
+                          <th>Customer</th>
+                          <th>Status</th>
+                          <th>Date</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach ($transactions as $transaction)
                         <tr>
                           <td>
-                            Introduction Laravel 5
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
+                            {{$transaction->customer_name}}
                           </td>
                           <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
+                            @if ($transaction->status == 'pending')
+                              <div class="badge badge-warning">Unpaid</div>
+                            @elseif ($transaction->status == 'rejeced')
+                              <div class="badge badge-danger">Rejected</div>
+                            @elseif ($transaction->status == 'refund')
+                              <div class="badge badge-danger">Refund</div>
+                            @else
+                              <div class="badge badge-success">Paid</div>
+                            @endif
+                          </td>
+                          <td>
+                            {{$transaction->created_at}}
                           </td>
                           <td>
                             <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
                             <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Installation
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - MVC
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Migration
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Deploy
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Closing
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                      </tbody>
+                        @endforeach
                     </table>
                   </div>
                 </div>

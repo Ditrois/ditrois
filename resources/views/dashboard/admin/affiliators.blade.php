@@ -13,6 +13,8 @@
     <div class="section-header">
       <h1>@yield('title')</h1>
     </div>
+    @include('dashboard.alert')
+
     <div class="section-body">
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">

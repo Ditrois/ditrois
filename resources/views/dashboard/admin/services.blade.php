@@ -13,6 +13,8 @@
         <div class="section-header">
             <h1>@yield('title')</h1>
         </div>
+        
+        @include('dashboard.alert')
 
         <div class="section-body">
         <div class="row">
@@ -29,114 +31,32 @@
                     <table class="table table-striped mb-0">
                       <thead>
                         <tr>
-                          <th>Title</th>
-                          <th>Author</th>
+                          <th>Name</th>
+                          <th>Category</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach ($services as $service)
                         <tr>
                           <td>
-                            Introduction Laravel 5
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
+                            {{$service->name}}
                           </td>
                           <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
+                            {{$service->service_category->name}}
                           </td>
                           <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+                            <a href="https://ditrois.com//{{$service->service_category->slug}}/{{$service->slug}}" class="btn btn-success btn-action mr-1">
+                                    <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/dashboard/admin/service/edit/{{$service->id}}" class="btn btn-primary btn-action mr-1">
+                                    <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="/dashboard/admin/service/delete/{{$service->id}}" class="btn btn-danger btn-action" onclick="return confirm ('Hapus service?')">
+                                    <i class="fas fa-trash"></i>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Installation
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - MVC
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Migration
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Deploy
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Laravel 5 Tutorial - Closing
-                            <div class="table-links">
-                              in <a href="#">Web Development</a>
-                              <div class="bullet"></div>
-                              <a href="#">View</a>
-                            </div>
-                          </td>
-                          <td>
-                            <a href="#" class="font-weight-600"><img src="../assets/img/avatar/avatar-1.png" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                          </td>
-                          <td>
-                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                          </td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

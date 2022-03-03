@@ -1,6 +1,6 @@
 @extends('dashboard.layout.layout')
 
-@section('title', 'Create New Theme')
+@section('title', 'Create New Service')
 
 @section('sidebar')
 @include('dashboard.admin.sidebar')
@@ -14,7 +14,7 @@
             <!-- <div class="section-header-back">
               <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div> -->
-            <h1>Create New Theme</h1>
+            <h1>Create New Service</h1>
             <!-- <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item"><a href="#">Posts</a></div>
@@ -46,8 +46,8 @@
                         </ul>
                     </div>
                     @endif
-                  <form action="/dashboard/admin/theme/new" method="post" enctype="multipart/form-data">
-                      @csrf
+                    <form action="/dashboard/admin/service/new" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                       <div class="col-sm-12 col-md-7">
@@ -55,24 +55,36 @@
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Service</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric" name="id_service">
-                          <option value="">Pilih Service</option>
-                          @foreach ($services as $service)
-                            @if (old('id_service') == $service->id)
-                                <option value="{{$service->id}}" selected>{{$service->name}}</option>
+                        <select class="form-control selectric" name="id_service_category">
+                          <option value="">Pilih Category</option>
+                          @foreach ($categories as $category)
+                            @if (old('id_service_category') == $category->id)
+                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
                             @else
-                                <option value="{{$service->id}}">{{$service->name}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endif
                           @endforeach
                         </select>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Demo Link</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Heading</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="demo_link" class="form-control" value="{{ old('demo_link') }}">
+                        <input type="text" name="banner_heading" class="form-control" value="{{ old('banner_heading') }}">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner Description</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea name="banner_desc" class="summernote-simple">{{ old('banner_desc') }}</textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Feature Description</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea name="feature_desc" class="summernote-simple">{{ old('feature_desc') }}</textarea>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -84,7 +96,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <button type="submit" class="btn btn-primary">Create Theme</button>
+                        <button class="btn btn-primary">Create Post</button>
                       </div>
                     </div>
                   </form>

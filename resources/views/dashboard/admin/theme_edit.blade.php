@@ -35,7 +35,18 @@
                     <h4>Write Your Post</h4>
                   </div> -->
                   <div class="card-body">
-                  <form action="/dashboard/admin/theme/edit/{{$theme->id}}" method="post" enctype="multipart/form-data">
+                    
+                    {{-- menampilkan error validasi --}}
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                  <form action="/dashboard/admin/theme/update/{{$theme->id}}" method="post" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
@@ -47,9 +58,13 @@
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Service</label>
                       <div class="col-sm-12 col-md-7">
                         <select name="id_service" class="form-control selectric">
-                            @foreach ($services as $service)
-                            <option value="{{$service->id}}" @if ($theme->name == $service->id)@endif>{{$service->name}}</option>
-                            @endforeach
+                          @foreach ($services as $service)
+                            @if ($theme->id_service == $service->id)
+                                <option value="{{$service->id}}" selected>{{$service->name}}</option>
+                            @else
+                                <option value="{{$service->id}}">{{$service->name}}</option>
+                            @endif
+                          @endforeach
                         </select>
                       </div>
                     </div>

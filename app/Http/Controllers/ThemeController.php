@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ThemeController extends Controller
 {
@@ -40,15 +41,28 @@ class ThemeController extends Controller
     {
         $data = $request->all();
 
-        $file = $request->file('image');
-        $path = 'admin/theme';
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $file->move($path,$nama_file);
-        $data['image'] = $nama_file;
-        
-        Theme::create($data);
+        $validator = Validator::make(
+            $data,
+            [
+                'id_service' => ['required'],
+                'name' => ['required', 'min:5'],
+                'demo_link' => ['required', 'min:5'],
+                'image' => ['required'],
+            ]
+        );
 
-        return redirect ('/dashboard/admin/theme')->with('toast_success','Berhasil membuat akun juri');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $file = $request->file('image');
+            $path = 'admin/theme';
+            $nama_file = time()."_".$file->getClientOriginalName();
+            $file->move($path,$nama_file);
+            $data['image'] = $nama_file;
+
+            Theme::create($data);
+            return redirect ('/dashboard/admin/theme')->with(['success' => 'Transaksi Baru Berhasil Dibuat']);
+        }
     }
 
     /**
@@ -83,9 +97,41 @@ class ThemeController extends Controller
      * @param  \App\Models\Theme  $theme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Theme $theme)
+    public function update(Request $request, $id)
     {
-        //
+        $theme = Theme::find($id);
+        $data = $request->all();
+
+        if ($request->image == null) {
+            $data = $request->except(['image']);
+        } else {
+            $data = $request->all();
+        }
+
+        $validator = Validator::make(
+            $data,
+            [
+                'id_service' => ['required'],
+                'name' => ['required', 'min:5'],
+                'demo_link' => ['required', 'min:5'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            if(is_null($request->image)){
+            }else{
+                $file = $request->file('image');
+                $path = 'admin/theme';
+                $nama_file = time()."_".$file->getClientOriginalName();
+                $file->move($path,$nama_file);
+                $data['image'] = $nama_file;
+            }
+            $theme->update($data);
+        }
+
+        return redirect ('/dashboard/admin/theme')->with(['success' => 'Theme Berhasil Diupdate']);
     }
 
     /**
@@ -94,8 +140,9 @@ class ThemeController extends Controller
      * @param  \App\Models\Theme  $theme
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Theme $theme)
+    public function destroy($id)
     {
-        //
+        Theme::where('id', $id)->delete();
+        return redirect ('/dashboard/admin/theme')->with(['success' => 'Theme Berhasil Dihapus']);
     }
 }

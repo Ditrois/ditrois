@@ -58,7 +58,11 @@ Route::group(['prefix' => 'dashboard',], function () {;
             Route::get('/', [AdminControllerDahboard::class, 'index'])->name('dashboard');
             Route::group(['prefix' => 'service'], function () { 
                 Route::get('/', [ServiceController::class, 'index']);
-                Route::get('/new', [ServiceController::class, 'store']);
+                Route::get('/new', [ServiceController::class, 'create']);
+                Route::post('/new', [ServiceController::class, 'store']);
+                Route::get('/delete/{id}', [ServiceController::class, 'destroy']);
+                Route::get('/edit/{id}', [ServiceController::class, 'edit']);
+                Route::post('/update/{id}', [ServiceController::class, 'update']);
             });
             Route::group(['prefix' => 'category'], function () { 
                 Route::get('/', [ServiceCategoryController::class, 'index']);

@@ -35,18 +35,29 @@
                     <h4>Write Your Post</h4>
                   </div> -->
                   <div class="card-body">
+                    
+                    {{-- menampilkan error validasi --}}
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                   <form action="/dashboard/admin/category/new" method="post">
                       @csrf
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="description" class="summernote-simple"></textarea>
+                        <textarea name="description" class="summernote-simple">{{ old('description') }}</textarea>
                       </div>
                     </div>
                     <div class="form-group row mb-4">

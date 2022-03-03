@@ -13,6 +13,7 @@
         <div class="section-header">
             <h1>@yield('title')</h1>
         </div>
+        @include('dashboard.alert')
 
         <div class="section-body">
 
@@ -32,6 +33,7 @@
                       <thead>
                         <tr>
                           <th>Name</th>
+                          <th>Service</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -43,6 +45,9 @@
                             <div class="table-links">
                               <a href="{{$theme->demo_link}}">Live Demo</a>
                             </div>
+                          </td>
+                          <td>
+                            {{ !empty($theme->service) ? $theme->service->name:'' }}
                           </td>
                           <td>
                             <a href="/dashboard/admin/theme/edit/{{$theme->id}}" class="btn btn-primary btn-action mr-1">

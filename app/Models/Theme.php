@@ -14,9 +14,4 @@ class Theme extends Model
     {
         return $this->belongsTo(Service::class, 'id_service');
     }
-    
-    public function themes()
-    {
-        return $this->hasMany(Theme::class);
-    }
 }

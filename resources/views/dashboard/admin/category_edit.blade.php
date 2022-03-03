@@ -35,6 +35,17 @@
                     <h4>Write Your Post</h4>
                   </div> -->
                   <div class="card-body">
+                    
+                    {{-- menampilkan error validasi --}}
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                   <form action="/dashboard/admin/category/update/{{$category->id}}" method="post">
                       @csrf
                     <div class="form-group row mb-4">

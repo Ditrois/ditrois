@@ -52,7 +52,7 @@
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Service</label>
                       <div class="col-sm-12 col-md-7">
                         <select class="form-control selectric" name="id_service">
-                          <option>Pilih Service</option>
+                          <option value="">Pilih Service</option>
                           @foreach ($services as $service)
                             @if (old('id_service') == $service->id)
                                 <option value="{{$service->id}}" selected>{{$service->name}}</option>
@@ -67,7 +67,7 @@
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Package</label>
                       <div class="col-sm-12 col-md-7">
                         <select class="form-control selectric" name="id_package">
-                          <option>Pilih Package</option>
+                          <option value="">Pilih Package</option>
                           @foreach ($packages as $package)
                             @if (old('id_package') == $package->id)
                                 <option value="{{$package->id}}" selected>{{$package->service->name}} - {{$package->name}}</option>
@@ -82,7 +82,7 @@
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Theme</label>
                       <div class="col-sm-12 col-md-7">
                         <select class="form-control selectric" name="id_theme">
-                          <option>Pilih Theme</option>
+                          <option value="">Pilih Theme</option>
                           @foreach ($themes as $theme)
                             @if (old('id_theme') == $theme->id)
                                 <option value="{{$theme->id}}" selected>{{$theme->service->name}} - {{$theme->name}}</option>

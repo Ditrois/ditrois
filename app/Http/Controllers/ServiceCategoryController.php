@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ServiceCategoryController extends Controller
 {
@@ -39,11 +41,21 @@ class ServiceCategoryController extends Controller
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name, '-');
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => ['required', 'unique:service_categories'],
+                'description' => ['required'],
+            ]
+        );
 
-        ServiceCategory::create($data);
-
-        return redirect ('/dashboard/admin/category')->with('toast_success','Berhasil membuat akun juri');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $data['slug'] = Str::slug($request->name, '-');
+            ServiceCategory::create($data);
+            return redirect ('/dashboard/admin/category')->with(['success' => 'Category Baru Berhasil Dibuat']);
+        }
     }
 
     /**
@@ -83,11 +95,23 @@ class ServiceCategoryController extends Controller
         $category = ServiceCategory::find($id);
         
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name, '-');
-        
-        $category->update($data);
 
-        return redirect ('/dashboard/admin/category');
+        $validator = Validator::make(
+            $data,
+            [
+                'name' => ['required'],
+                Rule::unique('users')->ignore($category),
+                'description' => ['required'],
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $data['slug'] = Str::slug($request->name, '-');
+            $category->update($data);
+            return redirect ('/dashboard/admin/category')->with(['success' => 'Category Berhasil Diupdate']);
+        }
     }
 
     /**
@@ -99,6 +123,6 @@ class ServiceCategoryController extends Controller
     public function destroy($id)
     {
         ServiceCategory::find($id)->delete();
-        return redirect ('/dashboard/admin/category');
+        return redirect ('/dashboard/admin/category')->with(['success' => 'Category Berhasil Dihapus']);
     }
 }

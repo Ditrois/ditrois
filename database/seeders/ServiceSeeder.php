@@ -34,7 +34,7 @@ class ServiceSeeder extends Seeder
         $UndanganWebService = Service::create([
             'id_service_category' => $UndanganCategory->id,
             'name' => 'Undangan Nikah Web',
-            'slug' => 'undangan_nikah_web',
+            'slug' => 'undangan-nikah-web',
             'banner_heading' => 'Undangan Nikah Web',
             'banner_desc' => 'Undangan Nikah Web',
             'feature_desc' => 'Undangan Nikah Web',
@@ -64,7 +64,7 @@ class ServiceSeeder extends Seeder
         $DokterGigiService = Service::create([
             'id_service_category' => $KesehatanCategory->id,
             'name' => 'Dokter Gigi',
-            'slug' => 'dokter_gigi',
+            'slug' => 'dokter-gigi',
             'banner_heading' => 'Website Dokter Gigi',
             'banner_desc' => 'Website Dokter Gigi',
             'feature_desc' => 'Website Dokter Gigi',
@@ -111,7 +111,7 @@ class ServiceSeeder extends Seeder
         $DokterMataService = Service::create([
             'id_service_category' => $KesehatanCategory->id,
             'name' => 'Dokter Mata',
-            'slug' => 'dokter_mata',
+            'slug' => 'dokter-mata',
             'banner_heading' => 'Website Dokter Mata',
             'banner_desc' => 'Website Dokter Mata',
             'feature_desc' => 'Website Dokter Mata',

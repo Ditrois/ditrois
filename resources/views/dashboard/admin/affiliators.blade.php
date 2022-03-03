@@ -52,7 +52,7 @@
         <div class="col-lg-6 col-md-6 col-12 col-sm-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="d-inline">Payment Request</h4>
+              <h4 class="d-inline">Withdraw Request</h4>
               <!-- <div class="card-header-action">
                 <a href="#" class="btn btn-primary">View All</a>
               </div> -->

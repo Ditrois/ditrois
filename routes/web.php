@@ -31,7 +31,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('service/dental', function () {
-    dd('zzzz');
     return view('dental');
 });
 

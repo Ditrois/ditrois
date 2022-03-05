@@ -31,7 +31,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('service/dental', function () {
-    return view('dental');
+    return view('services.dental.index');
 });
 
 // Route::get('/dashboard', function () {
